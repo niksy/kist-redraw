@@ -1,4 +1,4 @@
-/* kist-redraw 0.0.0 - Redraw elements on page (particularly for IE) | Author: Ivan Nikolić, 2014 | License: MIT */
+/* kist-redraw 0.1.0 - Redraw elements on page (particularly for IE) | Author: Ivan Nikolić, 2014 | License: MIT */
 ;(function ( $, window, document, undefined ) {
 
 	var o                    = {};
