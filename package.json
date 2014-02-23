@@ -1,0 +1,36 @@
+{
+  "name": "kist-redraw",
+  "version": "0.0.0",
+  "description": "Redraw elements on page (particularly for IE)",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ivan Nikolić",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-bump": "0.0.13",
+    "grunt-jscs-checker": "~0.3.2",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-cssmin": "^0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/niksy/kist-redraw.git"
+  },
+  "keywords": [
+    "ie",
+    "redraw",
+    "repaint"
+  ],
+  "bugs": {
+    "url": "https://github.com/niksy/kist-redraw/issues"
+  },
+  "homepage": "https://github.com/niksy/kist-redraw"
+}

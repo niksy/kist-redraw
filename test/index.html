@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Redraw</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<link rel="stylesheet" href="../src/kist-redraw.css" />
+</head>
+<body>
+	<div>Element</div>
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="../src/kist-redraw.js"></script>
+	<script>
+
+		$(document).on('ready', function () {
+
+			$('div').on('redrawComplete.kist.redraw', function () {
+				$(this).append('… and redraw complete!');
+			});
+
+			$('div').KistRedraw();
+
+		});
+
+	</script>
+</body>
+</html>

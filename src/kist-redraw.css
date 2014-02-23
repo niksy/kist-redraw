@@ -1,0 +1,7 @@
+.kist-redraw:before,
+.kist-redraw:after {
+	display:block !important;
+	content:'x' !important;
+	width:0 !important; height:0 !important;
+	overflow:hidden !important;
+}
