@@ -22,7 +22,7 @@ Redraw elements on page (particularly for IE).
 
 #### `timeout`
 
-Type: `Number`
+Type: `Number`  
 Default value: `50`
 
 Timeout between applying and removing redrawing styles.
@@ -31,14 +31,14 @@ Timeout between applying and removing redrawing styles.
 
 #### `$.KistRedraw.defaults.timeout`
 
-Type: `Number`
+Type: `Number`  
 Default value: `50`
 
 Globally change timeout between applying and removing redrawing styles.
 
 ## Events
 
-#### `redrawComplete.kist.dochopper`
+#### `redrawComplete.kist.redraw`
 
 Attached to: calling element
 
