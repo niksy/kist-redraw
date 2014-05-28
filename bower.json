@@ -1,6 +1,6 @@
 {
   "name": "kist-redraw",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Redraw elements on page for IE.",
   "main": "dist/kist-redraw.min.js",
   "license": "MIT",
