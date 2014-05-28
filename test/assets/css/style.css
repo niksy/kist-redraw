@@ -1,0 +1,24 @@
+div {
+	background:red;
+}
+div:hover span:before {
+	color:white;
+	background:blue;
+}
+
+span:before,
+span:after {
+	display:inline-block;
+	width:20px; height:20px;
+	font-weight:bold; font-size:18px;
+}
+span:before {
+	content:'z';
+	color:black;
+	background:pink;
+}
+span:after {
+	content:'y';
+	color:black;
+	background:yellow;
+}
