@@ -1,10 +1,9 @@
-/* jshint maxparams: 4 */
 ;(function ( $, window, document, undefined ) {
 
-	var o                    = {};
-	var pluginName           = 'KistRedraw';
-	var pluginDomNamespace   = 'kist-redraw';
-	var pluginEventNamespace = 'kist.redraw';
+	var plugin = {
+		classNs: 'KistRedraw',
+		eventNs: '.kist.redraw'
+	};
 
 	/**
 	 * Detect IE
@@ -34,95 +33,77 @@
 	 *
 	 * @return {Boolean}
 	 */
-	var isRedrawNeeded = function () {
+	function isRedrawNeeded () {
 		if ( ie && ie < 9 ) {
 			return true;
 		}
 		return false;
+	}
+
+	if ( isRedrawNeeded() ) {
+		// Attach necessary styles if redraw is needed
+		$('<style type="text/css">.KistRedraw:before,.KistRedraw:after {position:absolute !important;display:block !important;content:"x" !important;width:0 !important;overflow:hidden !important;}</style>')
+			.appendTo('head');
+	}
+
+	function Redraw () {}
+
+	$.extend(Redraw.prototype,{
+
+		/**
+		 * Redraw element
+		 *
+		 * @param  {ELement} el
+		 *
+		 * @return {Ui}
+		 */
+		redraw: function ( el ) {
+
+			var timeout = this.defaults.timeout;
+			el = $(el);
+
+			setTimeout(function () {
+
+				el.addClass(plugin.classNs);
+
+				setTimeout(function () {
+
+					el.removeClass(plugin.classNs);
+					el.trigger('complete' + plugin.eventNs);
+
+				}, timeout);
+
+			}, timeout);
+
+		},
+
+		defaults: {
+			timeout: 15
+		}
+
+	});
+
+	var o = new Redraw();
+
+	$.kist = $.kist || {};
+
+	$.kist.redraw = {
+		defaults: Redraw.prototype.defaults
 	};
 
-	var PluginModule = function ( element, options ) {
+	$.fn.redraw = function ( options ) {
 
-		this._element = element;
-		this.settings = $.extend( {}, this.defaults, options );
-
-	};
-
-	/**
-	 * Default options
-	 *
-	 * @type {Object}
-	 */
-	o.defaults = {
-		timeout: 50
-	};
-
-	/**
-	 * Initialize plugin
-	 *
-	 * @return {Plugin}
-	 */
-	o.init = function () {
-
-		this.getDomRefs();
-		this.redrawElement();
-
-		return this;
-
-	};
-
-	/**
-	 * Get DOM references
-	 *
-	 * @return {Plugin}
-	 */
-	o.getDomRefs = function () {
-
-		this.domRefs         = {};
-		this.domRefs.element = $( this._element );
-
-	};
-
-	/**
-	 * Redraw element
-	 *
-	 * @return {Ui}
-	 */
-	o.redrawElement = function () {
-
-		setTimeout($.proxy(function () {
-			this.domRefs.element.addClass(pluginDomNamespace);
-
-			setTimeout($.proxy(function () {
-
-				this.domRefs.element.removeClass(pluginDomNamespace);
-				this.domRefs.element.trigger( 'redrawComplete.' + pluginEventNamespace );
-
-			}, this), this.settings.timeout);
-
-		}, this), this.settings.timeout);
-
-	};
-
-	$.extend( PluginModule.prototype, o );
-
-	$[ pluginName ]          = {};
-	$[ pluginName ].defaults = PluginModule.prototype.defaults;
-
-	$.fn[ pluginName ] = function ( options ) {
-
-		// Exit early if redraw is not needed
-		if ( isRedrawNeeded() === false ) {
+		// If redraw is not needed, don’t run plugin
+		if ( !isRedrawNeeded() ) {
 			return;
 		}
 
 		this.each(function () {
-			if ( !$.data( this, pluginName ) ) {
-				$.data( this, pluginName, new PluginModule( this, options ).init() );
-			}
+			o.redraw(this);
 		});
 
 		return this;
+
 	};
 
 })( jQuery, window, document );
