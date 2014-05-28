@@ -1,8 +1,10 @@
 ;(function ( $, window, document, undefined ) {
 
 	var plugin = {
-		classNs: 'KistRedraw',
-		eventNs: '.kist.redraw'
+		ns: {
+			css: 'KistRedraw',
+			event: '.kist.redraw'
+		}
 	};
 
 	/**
@@ -27,22 +29,11 @@
 		return v > 4 ? v : undef;
 
 	}());
+	var redrawNeeded = ie && ie < 9 ? true : false;
 
-	/**
-	 * Determine if redraw is needed
-	 *
-	 * @return {Boolean}
-	 */
-	function isRedrawNeeded () {
-		if ( ie && ie < 9 ) {
-			return true;
-		}
-		return false;
-	}
-
-	if ( isRedrawNeeded() ) {
+	if ( redrawNeeded ) {
 		// Attach necessary styles if redraw is needed
-		$('<style type="text/css">.KistRedraw:before,.KistRedraw:after {position:absolute !important;display:block !important;content:"x" !important;width:0 !important;overflow:hidden !important;}</style>')
+		$('<style>.'+plugin.ns.css+':before,.'+plugin.ns.css+':after {position:absolute !important;display:block !important;content:"x" !important;width:0 !important;height:0 !important;overflow:hidden !important;}</style>')
 			.appendTo('head');
 	}
 
@@ -64,12 +55,12 @@
 
 			setTimeout(function () {
 
-				el.addClass(plugin.classNs);
+				el.addClass(plugin.ns.css);
 
 				setTimeout(function () {
 
-					el.removeClass(plugin.classNs);
-					el.trigger('complete' + plugin.eventNs);
+					el.removeClass(plugin.ns.css);
+					el.trigger('complete' + plugin.ns.event);
 
 				}, timeout);
 
@@ -94,7 +85,7 @@
 	$.fn.redraw = function ( options ) {
 
 		// If redraw is not needed, don’t run plugin
-		if ( !isRedrawNeeded() ) {
+		if ( !redrawNeeded ) {
 			return;
 		}
 
