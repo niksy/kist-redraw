@@ -1,45 +1,50 @@
-# Kist Redraw
+# kist-redraw
 
-Redraw elements on page (particularly for IE).
+Redraw elements on page for IE.
+
+## Installation
+
+```sh
+bower install niksy/kist-redraw
+```
 
 ## Usage
 
-1. Include jQuery and plugin (CSS and JS).
+```js
+$('.el').redraw();
+```
 
-    ```html
-    <link rel="stylesheet" href="dist/kist-redraw.min.css" />
-    <script src="jquery.min.js"></script>
-    <script src="dist/kist-redraw.min.js">
-    ```
+## API
 
-2. Initialize plugin.
+### `$el.redraw()`
 
-    ```javascript
-    $('.element').KistRedraw();
-    ```
+Redraw elements on page for IE.
 
-## Options
+### Global options
 
-#### `timeout`
+#### `$.kist.redraw.defaults`
+
+##### timeout
 
 Type: `Number`  
-Default value: `50`
+Default value: `15`
 
-Timeout between applying and removing redrawing styles.
+Change timeout between applying and removing redrawing styles.
 
-## Global options
+### Events
 
-#### `$.KistRedraw.defaults.timeout`
+#### `complete.kist.redraw`
 
-Type: `Number`  
-Default value: `50`
+Triggered when redrawing is complete.
 
-Globally change timeout between applying and removing redrawing styles.
+## Browser support
 
-## Events
+IE8. Other browsers ignore plugin changes.
 
-#### `redrawComplete.kist.redraw`
+## Acknowledgments
+  
+* [Forcing IE8 to rerender/repaint :before/:after pseudo elements](http://stackoverflow.com/a/8852418/178058)
 
-Attached to: calling element
+## License
 
-Triggered when redrawing is fully complete.
+MIT © [Ivan Nikolić](http://ivannikolic.com)
