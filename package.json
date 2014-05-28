@@ -1,6 +1,6 @@
 {
   "name": "kist-redraw",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Redraw elements on page for IE.",
   "main": "Gruntfile.js",
   "directories": {
