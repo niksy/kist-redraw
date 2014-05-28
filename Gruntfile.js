@@ -5,70 +5,29 @@ module.exports = function (grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		meta: {
-			banner: '<%= pkg.name %> <%= pkg.version %> - <%= pkg.description %> | Author: <%= pkg.author %>, <%= grunt.template.today("yyyy") %> | License: <%= pkg.license %>',
-			defaultBanner: '/* <%= meta.banner %> */\n',
-			unstrippedBanner: '/*! <%= meta.banner %> */'
+			banner: '/*! <%= pkg.name %> <%= pkg.version %> - <%= pkg.description %> | Author: <%= pkg.author %>, <%= grunt.template.today("yyyy") %> | License: <%= pkg.license %> */\n'
 		},
 
 		concat: {
-			options: {
-				stripBanners: true,
-				banner: '<%= meta.defaultBanner %>'
-			},
-			js: {
-				src: ['src/kist-redraw.js'],
-				dest: 'dist/kist-redraw.js'
-			},
-			css: {
-				src: ['src/kist-redraw.css'],
-				dest: 'dist/kist-redraw.css'
-			},
+			dist: {
+				options: {
+					stripBanners: true,
+					banner: '<%= meta.banner %>'
+				},
+				files: {
+					'dist/kist-redraw.js': ['src/kist-redraw.js']
+				}
+			}
 		},
 
 		uglify: {
 			dist: {
 				options: {
-					banner: '<%= meta.unstrippedBanner %>\n'
+					banner: '<%= meta.banner %>'
 				},
 				files: {
 					'dist/kist-redraw.min.js': ['src/kist-redraw.js']
 				}
-			}
-		},
-
-		cssmin: {
-			dist: {
-				options: {
-					banner: '<%= meta.unstrippedBanner %>'
-				},
-				files: {
-					'dist/kist-redraw.min.css': ['src/kist-redraw.css']
-				}
-			}
-		},
-
-		jscs: {
-			main: {
-				options: {
-					config: '.jscs',
-					'requireCurlyBraces': ['if', 'else', 'for', 'do', 'try', 'catch', 'case', 'default']
-				},
-				files: {
-					src: [
-						'src/kist-redraw.js'
-					]
-				}
-			}
-		},
-
-		jshint: {
-			main: {
-				options: {
-					jshintrc: '.jshintrc'
-				},
-				src: [
-					'src/kist-redraw.js'
-				]
 			}
 		},
 
@@ -81,8 +40,33 @@ module.exports = function (grunt) {
 				commitFiles: ['-a'],
 				createTag: true,
 				tagName: '%VERSION%',
-				tagMessage: 'Version %VERSION%',
+				tagMessage: '',
 				push: false
+			}
+		},
+
+		jscs: {
+			main: {
+				options: {
+					config: '.jscsrc'
+				},
+				files: {
+					src: [
+						'src/**/*.js',
+						'!src/**/kist-redraw.js'
+					]
+				}
+			}
+		},
+
+		jshint: {
+			main: {
+				options: {
+					jshintrc: '.jshintrc'
+				},
+				src: [
+					'src/**/*.js'
+				]
 			}
 		}
 
@@ -92,14 +76,12 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks( 'grunt-jscs-checker' );
 	grunt.loadNpmTasks( 'grunt-contrib-concat' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
 	grunt.loadNpmTasks( 'grunt-bump' );
 
 	grunt.registerTask( 'stylecheck', ['jshint:main', 'jscs:main'] );
-	grunt.registerTask( 'default', ['concat:js', 'concat:css', 'uglify:dist', 'cssmin:dist'] );
+	grunt.registerTask( 'default', ['concat', 'uglify'] );
 	grunt.registerTask( 'releasePatch', ['bump-only:patch', 'default', 'bump-commit'] );
 	grunt.registerTask( 'releaseMinor', ['bump-only:minor', 'default', 'bump-commit'] );
 	grunt.registerTask( 'releaseMajor', ['bump-only:major', 'default', 'bump-commit'] );
-
 
 };

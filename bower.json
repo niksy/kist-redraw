@@ -1,26 +1,32 @@
 {
   "name": "kist-redraw",
   "version": "0.1.0",
+  "description": "Redraw elements on page for IE.",
+  "main": "dist/kist-redraw.min.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "src",
+    "Gruntfile.js",
+    "package.json"
   ],
-  "dependencies": {
-    "jquery": ">=1.7 <2"
-  },
   "homepage": "https://github.com/niksy/kist-redraw",
-  "description": "Redraw elements on page (particularly for IE)",
-  "main": ["dist/kist-redraw.min.js","dist/kist-redraw.min.css"],
   "keywords": [
     "ie",
     "redraw",
-    "repain"
+    "repaint"
   ],
   "authors": [
     "Ivan Nikolić"
-  ]
+  ],
+  "dependencies": {
+    "jquery": ">1"
+  },
+  "devDependencies": {
+    "jquery": "1"
+  }
 }
