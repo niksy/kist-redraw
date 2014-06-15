@@ -8,15 +8,9 @@ Redraw elements on page for IE.
 bower install niksy/kist-redraw
 ```
 
-## Usage
-
-```js
-$('.el').redraw();
-```
-
 ## API
 
-### `$el.redraw()`
+### `Element.redraw()`
 
 Redraw elements on page for IE.
 
@@ -24,10 +18,12 @@ Redraw elements on page for IE.
 
 #### `$.kist.redraw.defaults`
 
+Type: `Object`
+
 ##### timeout
 
 Type: `Number`  
-Default value: `15`
+Default: `15`
 
 Change timeout between applying and removing redrawing styles.
 
@@ -36,6 +32,12 @@ Change timeout between applying and removing redrawing styles.
 #### `complete.kist.redraw`
 
 Triggered when redrawing is complete.
+
+## Examples
+
+```js
+$('.block').redraw();
+```
 
 ## Browser support
 
