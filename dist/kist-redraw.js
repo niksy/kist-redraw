@@ -1,10 +1,14 @@
-/*! kist-redraw 0.2.1 - Redraw elements on page for IE. | Author: Ivan Nikolić, 2014 | License: MIT */
+/*! kist-redraw 0.2.2 - Redraw elements on page for IE. | Author: Ivan Nikolić, 2014 | License: MIT */
 ;(function ( $, window, document, undefined ) {
 
 	var plugin = {
+		name: 'redraw',
 		ns: {
-			css: 'KistRedraw',
+			css: 'kist-Redraw',
 			event: '.kist.redraw'
+		},
+		error: function ( message ) {
+			throw new Error(plugin.name + ': ' + message);
 		}
 	};
 
@@ -79,11 +83,11 @@
 
 	$.kist = $.kist || {};
 
-	$.kist.redraw = {
+	$.kist[plugin.name] = {
 		defaults: Redraw.prototype.defaults
 	};
 
-	$.fn.redraw = function ( options ) {
+	$.fn[plugin.name] = function ( options ) {
 
 		// If redraw is not needed, don’t run plugin
 		if ( !redrawNeeded ) {
