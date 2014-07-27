@@ -86,7 +86,7 @@
 
 		// If redraw is not needed, don’t run plugin
 		if ( !redrawNeeded ) {
-			return;
+			return this;
 		}
 
 		this.each(function () {
