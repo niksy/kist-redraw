@@ -24,7 +24,7 @@
     "Ivan Nikolić"
   ],
   "dependencies": {
-    "jquery": ">1"
+    "jquery": ">=1"
   },
   "devDependencies": {
     "jquery": "1"

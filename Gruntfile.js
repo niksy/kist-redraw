@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function ( grunt ) {
 
 	grunt.initConfig({
 
@@ -65,23 +65,24 @@ module.exports = function (grunt) {
 					jshintrc: '.jshintrc'
 				},
 				src: [
-					'src/**/*.js'
+					'src/**/*.js',
+					'!src/**/kist-redraw.js'
 				]
 			}
 		}
 
 	});
 
-	grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-	grunt.loadNpmTasks( 'grunt-jscs-checker' );
-	grunt.loadNpmTasks( 'grunt-contrib-concat' );
-	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-bump' );
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-jscs');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-bump');
 
-	grunt.registerTask( 'stylecheck', ['jshint:main', 'jscs:main'] );
-	grunt.registerTask( 'default', ['stylecheck', 'concat', 'uglify'] );
-	grunt.registerTask( 'releasePatch', ['bump-only:patch', 'default', 'bump-commit'] );
-	grunt.registerTask( 'releaseMinor', ['bump-only:minor', 'default', 'bump-commit'] );
-	grunt.registerTask( 'releaseMajor', ['bump-only:major', 'default', 'bump-commit'] );
+	grunt.registerTask('stylecheck', ['jshint:main', 'jscs:main']);
+	grunt.registerTask('default', ['stylecheck', 'concat', 'uglify']);
+	grunt.registerTask('releasePatch', ['bump-only:patch', 'default', 'bump-commit']);
+	grunt.registerTask('releaseMinor', ['bump-only:minor', 'default', 'bump-commit']);
+	grunt.registerTask('releaseMajor', ['bump-only:major', 'default', 'bump-commit']);
 
 };
