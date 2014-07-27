@@ -1,4 +1,4 @@
-/*! kist-redraw 0.2.2 - Redraw elements on page for IE. | Author: Ivan Nikolić, 2014 | License: MIT */
+/*! kist-redraw 0.2.3 - Redraw elements on page for IE. | Author: Ivan Nikolić, 2014 | License: MIT */
 ;(function ( $, window, document, undefined ) {
 
 	var plugin = {
@@ -17,7 +17,7 @@
 	 *
 	 * Ref. https://gist.github.com/padolsey/527683
 	 *
-	 * @return {Number}
+	 * @return {Integer}
 	 */
 	var ie = (function () {
 
@@ -42,18 +42,16 @@
 			.appendTo('head');
 	}
 
-	function Redraw () {}
-
-	$.extend(Redraw.prototype,{
+	var redraw = {
 
 		/**
 		 * Redraw element
 		 *
 		 * @param  {ELement} el
 		 *
-		 * @return {Ui}
+		 * @return {}
 		 */
-		redraw: function ( el ) {
+		init: function ( el ) {
 
 			var timeout = this.defaults.timeout;
 			el = $(el);
@@ -77,25 +75,23 @@
 			timeout: 15
 		}
 
-	});
-
-	var o = new Redraw();
+	};
 
 	$.kist = $.kist || {};
 
 	$.kist[plugin.name] = {
-		defaults: Redraw.prototype.defaults
+		defaults: redraw.defaults
 	};
 
 	$.fn[plugin.name] = function ( options ) {
 
 		// If redraw is not needed, don’t run plugin
 		if ( !redrawNeeded ) {
-			return;
+			return this;
 		}
 
 		this.each(function () {
-			o.redraw(this);
+			redraw.init(this);
 		});
 
 		return this;
