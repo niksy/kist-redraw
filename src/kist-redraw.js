@@ -16,7 +16,7 @@
 	 *
 	 * Ref. https://gist.github.com/padolsey/527683
 	 *
-	 * @return {Number}
+	 * @return {Integer}
 	 */
 	var ie = (function () {
 
@@ -41,18 +41,16 @@
 			.appendTo('head');
 	}
 
-	function Redraw () {}
-
-	$.extend(Redraw.prototype,{
+	var redraw = {
 
 		/**
 		 * Redraw element
 		 *
 		 * @param  {ELement} el
 		 *
-		 * @return {Ui}
+		 * @return {}
 		 */
-		redraw: function ( el ) {
+		init: function ( el ) {
 
 			var timeout = this.defaults.timeout;
 			el = $(el);
@@ -76,14 +74,12 @@
 			timeout: 15
 		}
 
-	});
-
-	var o = new Redraw();
+	};
 
 	$.kist = $.kist || {};
 
 	$.kist[plugin.name] = {
-		defaults: Redraw.prototype.defaults
+		defaults: redraw.defaults
 	};
 
 	$.fn[plugin.name] = function ( options ) {
@@ -94,7 +90,7 @@
 		}
 
 		this.each(function () {
-			o.redraw(this);
+			redraw.init(this);
 		});
 
 		return this;
