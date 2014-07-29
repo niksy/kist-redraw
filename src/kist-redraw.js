@@ -11,32 +11,11 @@
 		}
 	};
 
-	/**
-	 * Detect IE
-	 *
-	 * Ref. https://gist.github.com/padolsey/527683
-	 *
-	 * @return {Integer}
-	 */
-	var ie = (function () {
+	// http://browserhacks.com/#hack-e2cb1ecfc2d67744c30566414042c53c
+	var ie = document.all && !document.addEventListener;
 
-		var undef;
-		var v   = 3;
-		var div = document.createElement('div');
-		var all = div.getElementsByTagName('i');
-
-		while (
-			div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
-			all[0]
-		);
-
-		return v > 4 ? v : undef;
-
-	}());
-	var redrawNeeded = ie && ie < 9 ? true : false;
-
-	if ( redrawNeeded ) {
-		// Attach necessary styles if redraw is needed
+	// Attach necessary styles if redraw is needed
+	if ( ie ) {
 		$('<style>.'+plugin.ns.css+':before,.'+plugin.ns.css+':after {position:absolute !important;display:block !important;content:"x" !important;width:0 !important;height:0 !important;overflow:hidden !important;}</style>')
 			.appendTo('head');
 	}
@@ -84,16 +63,13 @@
 
 	$.fn[plugin.name] = function ( options ) {
 
-		// If redraw is not needed, don’t run plugin
-		if ( !redrawNeeded ) {
+		if ( !ie ) {
 			return this;
 		}
 
-		this.each(function () {
+		return this.each(function () {
 			redraw.init(this);
 		});
-
-		return this;
 
 	};
 
