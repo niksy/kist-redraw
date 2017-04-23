@@ -1,3 +1,11 @@
+![Unmaintained project](https://img.shields.io/badge/status-unmaintained-red.svg)
+
+**This project is unmaintained.**
+
+Not needed for modern browsers.
+
+---
+
 # kist-redraw
 
 Redraw elements on page for IE.
